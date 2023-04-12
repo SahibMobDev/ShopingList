@@ -1,5 +1,6 @@
 package com.example.shopinglist.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.shopinglist.R
 import com.example.shopinglist.activities.MainApp
+import com.example.shopinglist.activities.NewNoteActivity
 import com.example.shopinglist.databinding.FragmentNoteBinding
 import com.example.shopinglist.db.MainViewModel
 
@@ -17,8 +19,9 @@ class NoteFragment : BaseFragment() {
         MainViewModel.MainViewModelFactory((context?.applicationContext as MainApp).database)
     }
     private lateinit var binding: FragmentNoteBinding
-    override fun onClickNew() {
 
+    override fun onClickNew() {
+        startActivity(Intent(activity, NewNoteActivity::class.java))
     }
 
     override fun onCreateView(
