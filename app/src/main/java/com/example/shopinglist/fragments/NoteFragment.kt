@@ -5,11 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.example.shopinglist.R
+import com.example.shopinglist.activities.MainApp
 import com.example.shopinglist.databinding.FragmentNoteBinding
+import com.example.shopinglist.db.MainViewModel
 
 class NoteFragment : BaseFragment() {
 
+    private val mainViewModel: MainViewModel by activityViewModels {
+        MainViewModel.MainViewModelFactory((context?.applicationContext as MainApp).database)
+    }
     private lateinit var binding: FragmentNoteBinding
     override fun onClickNew() {
 
