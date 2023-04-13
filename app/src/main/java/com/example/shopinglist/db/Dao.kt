@@ -12,5 +12,5 @@ interface Dao {
     fun getAllNotes() : Flow<List<NoteItem>>
 
     @Insert()
-    fun insertNote(noteItem: NoteItem)
+    suspend fun insertNote(noteItem: NoteItem)
 }
