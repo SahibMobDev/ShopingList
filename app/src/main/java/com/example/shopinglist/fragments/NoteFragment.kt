@@ -20,7 +20,7 @@ import com.example.shopinglist.db.MainViewModel
 import com.example.shopinglist.db.NoteAdapter
 import com.example.shopinglist.entities.NoteItem
 
-class NoteFragment : BaseFragment() {
+class NoteFragment : BaseFragment(), NoteAdapter.Listener {
     private lateinit var binding: FragmentNoteBinding
     private lateinit var editLauncher: ActivityResultLauncher<Intent>
     private lateinit var adapter: NoteAdapter
@@ -55,7 +55,7 @@ class NoteFragment : BaseFragment() {
 
     private fun initRcView() = with(binding){
         rcViewNote.layoutManager = LinearLayoutManager(activity)
-        adapter = NoteAdapter()
+        adapter = NoteAdapter(this@NoteFragment)
         rcViewNote.adapter = adapter
     }
 
@@ -77,5 +77,9 @@ class NoteFragment : BaseFragment() {
         const val NEW_NOTE_KEY = "new_note_key"
         @JvmStatic
         fun newInstance() = NoteFragment()
+    }
+
+    override fun deleteItem(id: Int) {
+        mainViewModel.deleteNote(id)
     }
 }

@@ -10,6 +10,7 @@ class MainViewModel(dataBase: MainDataBase) : ViewModel() {
 
     val allNotes: LiveData<List<NoteItem>> = dao.getAllNotes().asLiveData()
     fun insertNote(note: NoteItem) = viewModelScope.launch { dao.insertNote(note) }
+    fun deleteNote(id: Int) = viewModelScope.launch { dao.deleteNote(id) }
 
     class MainViewModelFactory(val dataBase: MainDataBase) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

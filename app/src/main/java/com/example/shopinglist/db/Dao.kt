@@ -2,6 +2,7 @@ package com.example.shopinglist.db
 
 import androidx.room.Query
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import com.example.shopinglist.entities.NoteItem
 import kotlinx.coroutines.flow.Flow
@@ -13,4 +14,7 @@ interface Dao {
 
     @Insert()
     suspend fun insertNote(noteItem: NoteItem)
+
+    @Query("DELETE FROM note_list WHERE id IS :id")
+    suspend fun deleteNote(id:Int)
 }
