@@ -7,4 +7,5 @@
     <string name="title_hint">Title</string>
     <string name="description_hint">Description</string>
     <string name="save">Save</string>
+    <string name="Bold">Bold</string>
 </resources>

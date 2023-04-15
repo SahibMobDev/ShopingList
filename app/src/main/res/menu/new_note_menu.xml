@@ -6,6 +6,14 @@
         android:title="@string/save"
         android:id="@+id/id_save"
         android:icon="@drawable/ic_save"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"
+        android:orderInCategory="2"/>
+
+    <item
+        android:title="@string/Bold"
+        android:id="@+id/id_bold"
+        android:icon="@drawable/baseline_format_bold_24"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="1"/>
 
 </menu>
