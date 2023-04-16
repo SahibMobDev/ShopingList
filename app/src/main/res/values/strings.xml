@@ -8,4 +8,5 @@
     <string name="description_hint">Description</string>
     <string name="save">Save</string>
     <string name="Bold">Bold</string>
+    <string name="color">Color</string>
 </resources>
