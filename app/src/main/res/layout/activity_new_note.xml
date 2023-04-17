@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#96DDD7"
+    android:background="@color/new_note_background"
     tools:context=".activities.NewNoteActivity">
 
     <androidx.cardview.widget.CardView
@@ -18,12 +18,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="visible">
 
             <EditText
                 android:id="@+id/edTitle"
@@ -58,7 +59,7 @@
         android:id="@+id/colorPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/green_main"
+        android:background="@color/new_note_background"
         android:elevation="10dp"
         android:orientation="horizontal"
         android:padding="3dp"
