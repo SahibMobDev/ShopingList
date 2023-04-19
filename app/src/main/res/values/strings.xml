@@ -6,6 +6,8 @@
     <string name="new_item">New</string>
     <string name="title_hint">Title</string>
     <string name="description_hint">Description</string>
+    <string name="new_list">New list name</string>
+    <string name="list_name">List name</string>
     <string name="save">Save</string>
     <string name="Bold">Bold</string>
     <string name="color">Color</string>
