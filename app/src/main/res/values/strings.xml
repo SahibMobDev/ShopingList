@@ -11,4 +11,6 @@
     <string name="save">Save</string>
     <string name="Bold">Bold</string>
     <string name="color">Color</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="create_list">Create list</string>
 </resources>
