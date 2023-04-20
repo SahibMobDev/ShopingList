@@ -11,6 +11,8 @@ import com.example.shopinglist.activities.MainApp
 import com.example.shopinglist.databinding.FragmentShoppingListNamesBinding
 import com.example.shopinglist.db.MainViewModel
 import com.example.shopinglist.dialogs.NewListDialog
+import com.example.shopinglist.entities.ShoppingListName
+import com.example.shopinglist.utils.TimeManager
 
 class ShoppingListNamesFragment : BaseFragment() {
     private lateinit var binding: FragmentShoppingListNamesBinding
@@ -21,7 +23,15 @@ class ShoppingListNamesFragment : BaseFragment() {
     override fun onClickNew() {
         NewListDialog.showDialog(activity as AppCompatActivity, object : NewListDialog.Listener {
             override fun onClick(name: String) {
-                Log.d("MyLog", "Name: $name")
+                val shopListName = ShoppingListName(
+                    id = null,
+                    name = name,
+                    time = TimeManager.getCurrentTime(),
+                    allItemCounter = 0,
+                    checkedItemCounter = 0,
+                    itemsIds = ""
+                )
+                mainViewModel.insertShopListName(shopListName)
             }
 
         })
@@ -51,7 +61,7 @@ class ShoppingListNamesFragment : BaseFragment() {
     }
 
     private fun observer() {
-        mainViewModel.allNotes.observe(viewLifecycleOwner) {
+        mainViewModel.allShopListNames.observe(viewLifecycleOwner) {
 
         }
     }
