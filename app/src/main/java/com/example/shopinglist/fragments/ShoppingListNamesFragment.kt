@@ -11,11 +11,13 @@ import com.example.shopinglist.activities.MainApp
 import com.example.shopinglist.databinding.FragmentShoppingListNamesBinding
 import com.example.shopinglist.db.MainViewModel
 import com.example.shopinglist.db.ShopListNameAdapter
+import com.example.shopinglist.dialogs.DeleteDialog
 import com.example.shopinglist.dialogs.NewListDialog
+import com.example.shopinglist.entities.NoteItem
 import com.example.shopinglist.entities.ShoppingListName
 import com.example.shopinglist.utils.TimeManager
 
-class ShoppingListNamesFragment : BaseFragment() {
+class ShoppingListNamesFragment : BaseFragment(), ShopListNameAdapter.Listener {
     private lateinit var binding: FragmentShoppingListNamesBinding
     private lateinit var adapter: ShopListNameAdapter
     private val mainViewModel: MainViewModel by activityViewModels {
@@ -60,7 +62,7 @@ class ShoppingListNamesFragment : BaseFragment() {
 
     private fun initRcView() = with(binding){
         rcView.layoutManager = LinearLayoutManager(activity)
-        adapter = ShopListNameAdapter()
+        adapter = ShopListNameAdapter(this@ShoppingListNamesFragment)
         rcView.adapter = adapter
     }
 
@@ -74,6 +76,18 @@ class ShoppingListNamesFragment : BaseFragment() {
     companion object {
         @JvmStatic
         fun newInstance() = ShoppingListNamesFragment()
+    }
+
+    override fun deleteItem(id: Int) {
+        DeleteDialog.showDialog(context as AppCompatActivity, object : DeleteDialog.Listener {
+            override fun onClick() {
+                mainViewModel.deleteShopListName(id)
+            }
+        })
+    }
+
+    override fun onClickItem(note: NoteItem) {
+
     }
 
 }
