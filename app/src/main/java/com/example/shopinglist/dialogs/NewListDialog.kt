@@ -10,7 +10,7 @@ object NewListDialog {
 
     fun showDialog(context: Context, listener: Listener) {
 
-        var dialog: AlertDialog? = null
+        lateinit var dialog: AlertDialog
         val builder = AlertDialog.Builder(context)
         val binding = NewListDialogBinding.inflate(LayoutInflater.from(context))
         builder.setView(binding.root)
@@ -20,7 +20,7 @@ object NewListDialog {
                 if (listName.isNotEmpty()) {
                     listener.onClick(listName)
                 }
-                dialog?.dismiss()
+                dialog.dismiss()
             }
         }
         dialog = builder.create()

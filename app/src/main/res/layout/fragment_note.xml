@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C6C0C0"
+    android:background="@color/gray_background"
     tools:context=".fragments.NoteFragment">
 
     <androidx.recyclerview.widget.RecyclerView
