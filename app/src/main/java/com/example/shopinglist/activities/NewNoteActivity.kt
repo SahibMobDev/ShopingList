@@ -15,7 +15,6 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
-import androidx.core.text.getSpans
 import com.example.shopinglist.R
 import com.example.shopinglist.databinding.ActivityNewNoteBinding
 import com.example.shopinglist.entities.NoteItem
@@ -23,7 +22,6 @@ import com.example.shopinglist.fragments.NoteFragment
 import com.example.shopinglist.utils.HtmlManager
 import com.example.shopinglist.utils.MyTouchListener
 import com.example.shopinglist.utils.TimeManager
-import java.text.SimpleDateFormat
 import java.util.*
 
 class NewNoteActivity : AppCompatActivity() {
@@ -37,11 +35,11 @@ class NewNoteActivity : AppCompatActivity() {
         actionBarSettings()
         getNote()
         init()
-        onClickColoPicker()
+        onClickColorPicker()
         actionMenuCallback()
     }
 
-    private fun onClickColoPicker() = with(binding){
+    private fun onClickColorPicker() = with(binding){
 
             imBlack.setOnClickListener {
                 setColorForSelectedText(R.color.picker_black)

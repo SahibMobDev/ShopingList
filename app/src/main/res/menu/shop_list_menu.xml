@@ -27,7 +27,7 @@
     <item
         android:title="Save item"
         android:id="@+id/save_item"
-        android:icon="@drawable/ic_save"
+        android:icon="@drawable/ic_check"
         app:showAsAction="ifRoom"
         android:orderInCategory="2"
         />

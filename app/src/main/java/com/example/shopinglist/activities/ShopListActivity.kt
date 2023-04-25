@@ -7,17 +7,20 @@ import android.view.MenuItem
 import android.view.MenuItem.OnActionExpandListener
 import android.widget.EditText
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shopinglist.R
 import com.example.shopinglist.databinding.ActivityShopListBinding
 import com.example.shopinglist.db.MainViewModel
+import com.example.shopinglist.db.ShopListItemAdapter
 import com.example.shopinglist.entities.ShopListItem
 import com.example.shopinglist.entities.ShopListNameItem
 
-class ShopListActivity : AppCompatActivity() {
+class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
     private lateinit var binding: ActivityShopListBinding
     private var shopListNameItem: ShopListNameItem? = null
     private lateinit var saveItem: MenuItem
     private var edItem: EditText? = null
+    lateinit var adapter: ShopListItemAdapter
 
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModel.MainViewModelFactory((applicationContext as MainApp).database)
@@ -28,6 +31,8 @@ class ShopListActivity : AppCompatActivity() {
         binding = ActivityShopListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        initRcView()
+        listItemObserver()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -58,7 +63,20 @@ class ShopListActivity : AppCompatActivity() {
             shopListNameItem?.id!!,
             0
         )
+        edItem?.setText("")
         mainViewModel.insertShopItem(item)
+    }
+
+    private fun listItemObserver() {
+        mainViewModel.getAllItemsFromList(shopListNameItem?.id!!).observe(this) {
+            adapter.submitList(it)
+        }
+    }
+
+    private fun initRcView() = with(binding) {
+        adapter = ShopListItemAdapter(this@ShopListActivity)
+        rcView.layoutManager = LinearLayoutManager(this@ShopListActivity)
+        rcView.adapter = adapter
     }
 
     private fun expandActionView(): OnActionExpandListener {
@@ -84,5 +102,17 @@ class ShopListActivity : AppCompatActivity() {
 
     companion object {
         const val SHOP_LIST_NAME = "shop_list_name"
+    }
+
+    override fun deleteItem(id: Int) {
+
+    }
+
+    override fun onClickItem(shopListNameItem: ShopListNameItem) {
+
+    }
+
+    override fun editItem(shopListName: ShopListNameItem) {
+
     }
 }
