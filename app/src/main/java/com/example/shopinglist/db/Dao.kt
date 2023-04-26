@@ -35,6 +35,9 @@ interface Dao {
     @Update()
     suspend fun updateListName(shopListName: ShopListNameItem)
 
+    @Update()
+    suspend fun updateListItem(item: ShopListItem)
+
     @Query("DELETE FROM note_list WHERE id IS :id")
     suspend fun deleteNote(id:Int)
 
