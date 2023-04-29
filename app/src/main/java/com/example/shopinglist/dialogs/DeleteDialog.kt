@@ -11,17 +11,17 @@ object DeleteDialog {
 
     fun showDialog(context: Context, listener: Listener) {
 
-        lateinit var dialog: AlertDialog
+        var dialog: AlertDialog? = null
         val builder = AlertDialog.Builder(context)
         val binding = DeleteDialogBinding.inflate(LayoutInflater.from(context))
         builder.setView(binding.root)
         binding.apply {
             bDelete.setOnClickListener {
                 listener.onClick()
-                dialog.dismiss()
+                dialog?.dismiss()
             }
             bCancel.setOnClickListener {
-                dialog.dismiss()
+                dialog?.dismiss()
             }
         }
         dialog = builder.create()
