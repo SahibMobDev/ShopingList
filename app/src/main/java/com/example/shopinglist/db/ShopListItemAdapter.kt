@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shopinglist.R
 import com.example.shopinglist.databinding.ActivityShopListBinding
 import com.example.shopinglist.databinding.ListNameItemBinding
+import com.example.shopinglist.databinding.ShopLibraryListItemBinding
 import com.example.shopinglist.databinding.ShopListItemBinding
 import com.example.shopinglist.entities.ShopListNameItem
 import com.example.shopinglist.entities.ShopListItem
@@ -59,7 +60,10 @@ class ShopListItemAdapter(private val listener: Listener) : ListAdapter<ShopList
         }
 
         fun setLibraryData(shopListItem: ShopListItem, listener: Listener) {
-
+            val binding = ShopLibraryListItemBinding.bind(view)
+            binding.apply {
+                tvName.text = shopListItem.name
+            }
         }
 
         private fun setPaintFlagAndColor(binding: ShopListItemBinding) {

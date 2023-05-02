@@ -13,8 +13,13 @@ class MainViewModel(dataBase: MainDataBase) : ViewModel() {
 
     val allNotes: LiveData<List<NoteItem>> = dao.getAllNotes().asLiveData()
     val allShopListNames: LiveData<List<ShopListNameItem>> = dao.getAllShopListNames().asLiveData()
+    val libraryItems = MutableLiveData<List<LibraryItem>>()
 
     fun getAllItemsFromList(listId: Int): LiveData<List<ShopListItem>> = dao.getAllShopListItems(listId).asLiveData()
+
+    fun getAllLibraryItems(name: String) = viewModelScope.launch {
+        libraryItems.postValue(dao.getAllLibraryItems(name))
+    }
 
     fun insertNote(note: NoteItem) = viewModelScope.launch {
         dao.insertNote(note)
