@@ -63,6 +63,12 @@ class ShopListItemAdapter(private val listener: Listener) : ListAdapter<ShopList
             val binding = ShopLibraryListItemBinding.bind(view)
             binding.apply {
                 tvName.text = shopListItem.name
+                imEdit.setOnClickListener {
+                    listener.onClickItem(shopListItem, EDIT_LIBRARY_ITEM)
+                }
+                imDelete.setOnClickListener {
+                    listener.onClickItem(shopListItem, DELETE_LIBRARY_ITEM)
+                }
             }
         }
 
@@ -153,5 +159,7 @@ class ShopListItemAdapter(private val listener: Listener) : ListAdapter<ShopList
     companion object {
         const val EDIT = 0
         const val CHECK_BOX = 1
+        const val EDIT_LIBRARY_ITEM = 2
+        const val DELETE_LIBRARY_ITEM = 3
     }
 }

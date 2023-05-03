@@ -19,6 +19,7 @@ import com.example.shopinglist.databinding.ActivityShopListBinding
 import com.example.shopinglist.db.MainViewModel
 import com.example.shopinglist.db.ShopListItemAdapter
 import com.example.shopinglist.dialogs.EditListItemDialog
+import com.example.shopinglist.entities.LibraryItem
 import com.example.shopinglist.entities.ShopListItem
 import com.example.shopinglist.entities.ShopListNameItem
 import com.example.shopinglist.utils.ShareHelper
@@ -135,6 +136,11 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
                 tempShopList.add(shopItem)
             }
             adapter.submitList(tempShopList)
+            binding.tvEmpty.visibility = if (it.isEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
     }
 
@@ -181,6 +187,11 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         when(state) {
             ShopListItemAdapter.CHECK_BOX -> mainViewModel.updateListItem(shopListItem)
             ShopListItemAdapter.EDIT -> editListItem(shopListItem)
+            ShopListItemAdapter.EDIT_LIBRARY_ITEM -> editLibraryItem(shopListItem)
+            ShopListItemAdapter.DELETE_LIBRARY_ITEM -> {
+                mainViewModel.deleteLibraryItem(id = shopListItem.id!!)
+                mainViewModel.getAllLibraryItems("%${edItem?.text.toString()}%")
+            }
         }
 
     }
@@ -189,6 +200,19 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         EditListItemDialog.showDialog(this, item, object: EditListItemDialog.Listener {
             override fun onClick(item: ShopListItem) {
                 mainViewModel.updateListItem(item)
+            }
+
+        })
+    }
+
+    private fun editLibraryItem(item: ShopListItem) {
+        EditListItemDialog.showDialog(this, item, object: EditListItemDialog.Listener {
+            override fun onClick(item: ShopListItem) {
+                mainViewModel.updateLibraryItem(LibraryItem(
+                    id = item.id,
+                    name = item.name
+                ))
+                mainViewModel.getAllLibraryItems("%${edItem?.text.toString()}%")
             }
 
         })

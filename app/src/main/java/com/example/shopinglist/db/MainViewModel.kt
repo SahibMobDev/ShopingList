@@ -34,6 +34,9 @@ class MainViewModel(dataBase: MainDataBase) : ViewModel() {
     fun updateNote(note: NoteItem) = viewModelScope.launch {
         dao.updateNote(note)
     }
+    fun updateLibraryItem(item: LibraryItem) = viewModelScope.launch {
+        dao.updateLibraryItem(item)
+    }
     fun updateListName(shopListName: ShopListNameItem) = viewModelScope.launch {
         dao.updateListName(shopListName)
     }
@@ -42,6 +45,9 @@ class MainViewModel(dataBase: MainDataBase) : ViewModel() {
     }
     fun deleteNote(id: Int) = viewModelScope.launch {
         dao.deleteNote(id)
+    }
+    fun deleteLibraryItem(id: Int) = viewModelScope.launch {
+        dao.deleteLibraryItem(id)
     }
     fun deleteShopList(id: Int, deleteList: Boolean) = viewModelScope.launch {
         if (deleteList) dao.deleteShopListName(id)
