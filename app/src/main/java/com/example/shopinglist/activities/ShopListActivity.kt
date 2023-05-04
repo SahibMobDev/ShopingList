@@ -11,6 +11,8 @@ import android.view.MenuItem
 import android.view.MenuItem.OnActionExpandListener
 import android.view.View
 import android.widget.EditText
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -218,4 +220,21 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
 
         })
     }
+
+    private fun saveItemCount() {
+        var checkedItemCounter = 0
+        adapter.currentList.forEach {
+            if (it.itemChecked) checkedItemCounter++
+        }
+        val tempShopListNameItem = shopListNameItem?.copy(
+            allItemCounter = adapter.itemCount,
+            checkedItemCounter = checkedItemCounter
+        )
+        mainViewModel.updateListName(tempShopListNameItem!!)
+    }
+
+        override fun onBackPressed() {
+            saveItemCount()
+            super.onBackPressed()
+        }
 }

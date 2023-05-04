@@ -1,13 +1,17 @@
 package com.example.shopinglist.db
 
+import android.content.Context
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopinglist.R
 import com.example.shopinglist.databinding.ListNameItemBinding
+import com.example.shopinglist.entities.ShopListItem
 import com.example.shopinglist.entities.ShopListNameItem
 
 class ShopListNameAdapter(private val listener: Listener) : ListAdapter<ShopListNameItem, ShopListNameAdapter.ItemHolder>(ItemComparator()) {
@@ -28,6 +32,13 @@ class ShopListNameAdapter(private val listener: Listener) : ListAdapter<ShopList
         fun setData(shopListNameItem: ShopListNameItem, listener: Listener) = with(binding) {
             tvListName.text = shopListNameItem.name
             tvTime.text = shopListNameItem.time
+            pBar.max = shopListNameItem.allItemCounter
+            pBar.progress = shopListNameItem.checkedItemCounter
+            val colorState = ColorStateList.valueOf(getProgressColorState(shopListNameItem, binding.root.context))
+            pBar.progressTintList = colorState
+            counterCard.backgroundTintList = colorState
+            val counterText = "${shopListNameItem.checkedItemCounter}/${shopListNameItem.allItemCounter}"
+            tvCounter.text = counterText
             itemView.setOnClickListener {
                 listener.onClickItem(shopListNameItem)
             }
@@ -36,6 +47,14 @@ class ShopListNameAdapter(private val listener: Listener) : ListAdapter<ShopList
             }
             imEdit.setOnClickListener {
                 listener.editItem(shopListNameItem)
+            }
+        }
+
+        private fun getProgressColorState(item: ShopListNameItem, context: Context): Int {
+            return if (item.checkedItemCounter == item.allItemCounter) {
+                ContextCompat.getColor(context, R.color.green_main)
+            } else {
+                ContextCompat.getColor(context, R.color.red_main)
             }
         }
 
