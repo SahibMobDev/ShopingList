@@ -45,6 +45,12 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         init()
         initRcView()
         listItemObserver()
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                saveItemCount()
+                finish()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -233,8 +239,8 @@ class ShopListActivity : AppCompatActivity(), ShopListItemAdapter.Listener {
         mainViewModel.updateListName(tempShopListNameItem!!)
     }
 
-        override fun onBackPressed() {
+/*        override fun onBackPressed() {
             saveItemCount()
             super.onBackPressed()
-        }
+        }*/
 }
