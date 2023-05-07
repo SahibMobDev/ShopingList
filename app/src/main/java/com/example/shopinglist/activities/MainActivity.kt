@@ -1,5 +1,6 @@
 package com.example.shopinglist.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import com.example.shopinglist.dialogs.NewListDialog
 import com.example.shopinglist.fragments.FragmentManager
 import com.example.shopinglist.fragments.NoteFragment
 import com.example.shopinglist.fragments.ShoppingListNamesFragment
+import com.example.shopinglist.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     lateinit var binding: ActivityMainBinding
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
         binding.bNav.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.settings -> {
-                    Log.d("MyLog", "Settings")
+                    startActivity(Intent(this, SettingsActivity::class.java))
                 }
                 R.id.notes -> {
                     FragmentManager.setFragment(NoteFragment.newInstance(), this)
