@@ -1,5 +1,6 @@
 package com.example.shopinglist.db
 
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,10 @@ import com.example.shopinglist.R
 import com.example.shopinglist.databinding.NoteListItemBinding
 import com.example.shopinglist.entities.NoteItem
 import com.example.shopinglist.utils.HtmlManager
+import com.example.shopinglist.utils.TimeManager
 
 
-class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()) {
+class NoteAdapter(private val listener: Listener, private val defPref: SharedPreferences) : ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
@@ -20,17 +22,17 @@ class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAd
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.setData(getItem(position), listener)
+        holder.setData(getItem(position), listener, defPref)
     }
 
 
 
     class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = NoteListItemBinding.bind(view)
-        fun setData(note: NoteItem, listener: Listener) = with(binding) {
+        fun setData(note: NoteItem, listener: Listener, defPref: SharedPreferences) = with(binding) {
             tvTitle.text = note.title
             tvDescription.text = HtmlManager.getFromHtml(note.content).trim()
-            tvTime.text = note.time
+            tvTime.text = TimeManager.getTimeFormat(note.time, defPref)
             itemView.setOnClickListener {
                 listener.onClickItem(note)
             }
