@@ -10,7 +10,7 @@
         android:icon="@mipmap/shop_list_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ShopingList"
+        android:theme="@style/Theme.ShoppingListRed"
         tools:targetApi="31">
         <activity
             android:name=".settings.SettingsActivity"
@@ -21,7 +21,7 @@
         <activity
             android:name=".activities.NewNoteActivity"
             android:exported="false"
-            android:theme="@style/Theme.NewNote"
+            android:theme="@style/Theme.NewNoteRed"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".activities.MainActivity"

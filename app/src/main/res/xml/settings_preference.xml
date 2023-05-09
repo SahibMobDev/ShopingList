@@ -28,7 +28,7 @@
     <PreferenceCategory android:title="@string/theme_settings">
 
         <ListPreference
-            android:defaultValue="1"
+            android:defaultValue="blue"
             android:entries="@array/chose_theme_array"
             android:entryValues="@array/chose_theme_values"
             android:icon="@drawable/ic_theme"

@@ -29,12 +29,15 @@ import java.util.*
 
 class NewNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewNoteBinding
+    private lateinit var defPref: SharedPreferences
     private var note: NoteItem? = null
     private var pref: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewNoteBinding.inflate(layoutInflater)
+        defPref = PreferenceManager.getDefaultSharedPreferences(this)
+        setTheme(getSelectedTheme())
         setContentView(binding.root)
         actionBarSettings()
         getNote()
@@ -232,5 +235,13 @@ class NewNoteActivity : AppCompatActivity() {
 
     private fun EditText.setTextSize(size: String?) {
         if (size != null) this.textSize = size.toFloat()
+    }
+
+    private fun getSelectedTheme(): Int {
+        return if (defPref.getString("theme_key", "blue") == "blue") {
+            R.style.Theme_NewNoteBlue
+        } else {
+            R.style.Theme_NewNoteRed
+        }
     }
 }
