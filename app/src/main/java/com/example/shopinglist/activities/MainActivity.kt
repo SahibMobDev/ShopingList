@@ -18,11 +18,13 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     lateinit var binding: ActivityMainBinding
     private lateinit var defPref: SharedPreferences
     private var currentMenuItemId = R.id.notes
+    private var currentTheme = ""
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         defPref = PreferenceManager.getDefaultSharedPreferences(this)
         setTheme(getSelectedTheme())
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        currentTheme = defPref.getString("theme_key", "blue").toString()
         setContentView(binding.root)
         FragmentManager.setFragment(ShoppingListNamesFragment.newInstance(), this)
         setBottomNavListener()
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     override fun onResume() {
         super.onResume()
         binding.bNav.selectedItemId = currentMenuItemId
+        if (defPref.getString("theme_key", "blue") !== currentTheme) recreate()
     }
 
     private fun getSelectedTheme(): Int {
