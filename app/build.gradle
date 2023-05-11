@@ -64,4 +64,7 @@ dependencies {
 
     //Preference
     implementation "androidx.preference:preference-ktx:$preference_version"
+
+    //Ads
+    implementation 'com.google.android.gms:play-services-ads:22.0.0'
 }
